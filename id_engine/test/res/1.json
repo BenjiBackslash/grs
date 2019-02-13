@@ -1,0 +1,36 @@
+[
+  {
+    "barcode" : 7290005287206,
+    "name" : "רביעיית טונה בשמן",
+    "producer" : "starkist",
+    "package": "4*160",
+    "quantity" : "640g"
+  },
+  {
+    "barcode" : 5425000198055,
+    "name" : "רייס דרים משקה שקדים",
+    "producer" : "rice dream",
+    "quantity" : "1l"
+  },
+  {
+    "barcode" : 7290000144474,
+    "name" : "שמן קנולה בריאות",
+    "producer" : "עץ הזית",
+    "country": "il",
+    "quantity" : "1L"
+  },
+  {
+    "barcode" : 5000189974579,
+    "name" : "קיט קט מיני",
+    "producer" : "kit kat",
+    "quantity" : "200g"
+  },
+  {
+    "barcode" : 7290000467160,
+    "name" : "7-9 מלפפונים בחומץ גדול",
+    "producer" : "בית השיטה",
+    "quantity" : "560g"
+  }
+]
+
+
