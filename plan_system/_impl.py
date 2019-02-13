@@ -20,14 +20,16 @@ def event(mongo, item):
 
 
 def update_history(mongo, user_id):
-    products_history = mongo.db.history.find_one({"user_id": user_id})
+    products_history = mongo.db.history.find_one({"user_id": str(user_id)})
     if not products_history:
         products_history = {"user_id": str(user_id), "last_event": datetime.utcnow() - timedelta(days=30), "items": {}}
     history_items = products_history["items"]
     last_event = products_history["last_event"]
 
     events = mongo.db.event.find({"user_id": str(user_id), "date": {"$gt": last_event}})
+    _do_update = False
     for e in events:
+        _do_update = True
         barcode = str(e["barcode"])
         if barcode not in history_items:
             history_items[barcode] = {
@@ -56,14 +58,15 @@ def update_history(mongo, user_id):
         products_history["last_event"] = e["date"]
 
     products_history["items"] = history_items
-    mongo.db.history.replace_one({"user_id": str(user_id)}, products_history, upsert=True)
+    if _do_update:
+        mongo.db.history.replace_one({"user_id": str(user_id)}, products_history, upsert=True)
     return products_history
 
 
 def make_shop_list(history_items):
     supply_for = 7
     shop_list = []
-    for b, attr in history_items:
+    for b, attr in history_items.items():
         cur_stock_for_days = attr["cur_units"] * attr["avg_days"]
         remain_to_stock_days = supply_for - cur_stock_for_days
         num_unit_to_buy = math.ceil(remain_to_stock_days / attr["avg_days"])

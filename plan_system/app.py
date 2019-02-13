@@ -24,9 +24,7 @@ def event():
 @app.route('/plan/<user_id>', methods=["GET"])
 def plan(user_id):
     products_history = _impl.update_history(mongo, user_id)
-
     shop_list = _impl.make_shop_list(products_history["items"])
-
     return jsonify({"result": shop_list})
 
 
