@@ -17,3 +17,4 @@ def get_data(mongo, barcode):
     if data:
         data = {k: v for k, v in data.items() if k != "_id"}
     return data
+    
